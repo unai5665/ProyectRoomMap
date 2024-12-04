@@ -11,3 +11,11 @@ data class MarkerType(
     val iconResource: Int
     )
 
+
+data class Marker(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    val title: String,
+    val latitude: Double,
+    val longitude: Double,
+    val typeId: Int
+)
