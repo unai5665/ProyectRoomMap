@@ -21,5 +21,7 @@ interface MarkerTypeDao {
     @Query("SELECT * FROM MarkerType")
     fun getAllMarkerTypes(): LiveData<List<MarkerType>>
 
+    @Insert
+    suspend fun insertMarkerType(markerType: MarkerType)
 
 }
