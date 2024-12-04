@@ -9,5 +9,9 @@ interface DaoMarker{
     @Query("SELECT * FROM Marker")
     fun getAllMarkers(): LiveData<List<Marker>>
 
+    @Insert
+    suspend fun insertMarker(marker: Marker)
+
+
 
 }
