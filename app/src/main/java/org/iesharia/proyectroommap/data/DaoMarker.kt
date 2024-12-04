@@ -12,6 +12,7 @@ interface DaoMarker{
     @Insert
     suspend fun insertMarker(marker: Marker)
 
-
+    @Delete
+    suspend fun deleteMarker(marker: Marker)
 
 }
