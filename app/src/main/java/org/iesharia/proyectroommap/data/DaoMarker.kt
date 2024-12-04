@@ -16,3 +16,10 @@ interface DaoMarker{
     suspend fun deleteMarker(marker: Marker)
 
 }
+@Dao
+interface MarkerTypeDao {
+    @Query("SELECT * FROM MarkerType")
+    fun getAllMarkerTypes(): LiveData<List<MarkerType>>
+
+
+}
