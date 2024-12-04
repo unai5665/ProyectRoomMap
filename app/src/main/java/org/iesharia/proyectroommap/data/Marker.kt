@@ -1,8 +1,6 @@
 package org.iesharia.proyectroommap.data
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity
 data class MarkerType(
