@@ -11,7 +11,14 @@ data class MarkerType(
     val iconResource: Int
     )
 
-
+@Entity(
+    foreignKeys = [ForeignKey(
+        entity = MarkerType::class,
+        parentColumns = ["id"],
+        childColumns = ["typeId"],
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 data class Marker(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
