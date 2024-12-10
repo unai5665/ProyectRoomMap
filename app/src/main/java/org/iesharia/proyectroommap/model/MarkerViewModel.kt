@@ -15,4 +15,11 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
     val allMarkers: LiveData<List<Marker>> = markerDao.getAllMarkers()
     val allMarkerTypes: LiveData<List<MarkerType>> = markerTypeDao.getAllMarkerTypes()
 
+    fun addMarker(marker: Marker) {
+        viewModelScope.launch(Dispatchers.IO) {
+            markerDao.insertMarker(marker)
+        }
+    }
+
+
 }
