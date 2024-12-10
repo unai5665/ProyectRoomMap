@@ -21,5 +21,9 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-
+    fun addMarkerType(markerType: MarkerType) {
+        viewModelScope.launch(Dispatchers.IO) {
+            markerTypeDao.insertMarkerType(markerType)
+        }
+    }
 }
