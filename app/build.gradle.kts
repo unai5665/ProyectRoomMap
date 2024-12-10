@@ -3,16 +3,15 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
-
 }
 
 android {
-    namespace = "org.iesharia.proyectroommap"
-    compileSdk = 34
+    namespace = "com.example.viewmodelrm"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "org.iesharia.proyectroommap"
-        minSdk = 28
+        applicationId = "com.example.viewmodelrm"
+        minSdk = 35
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -42,18 +41,25 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.activity.compose.v172)
-    implementation(libs.ui)
-    implementation(libs.androidx.material)
-    implementation(libs.ui.tooling.preview)
 
-    // Room
-    implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
+    //Corrutinas
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
-    // Lifecycle
-    implementation(libs.androidx.lifecycle.runtime.ktx.v261)
+    //Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation(libs.androidx.runtime.livedata)
+    ksp("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    //ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+
+
+    //Mapas
+    implementation(libs.osmdroid.android)
+    implementation(libs.osm.android.compose)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

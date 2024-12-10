@@ -24,3 +24,8 @@ data class Marker(
     val longitude: Double,
     val typeId: Int
 )
+
+data class MarkerWithType(
+    @Embedded val marker: Marker,
+    @Relation(parentColumn = "typeId", entityColumn = "id") val markerType: MarkerType
+)

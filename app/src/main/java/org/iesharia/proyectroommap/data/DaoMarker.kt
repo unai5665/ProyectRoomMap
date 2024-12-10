@@ -5,16 +5,14 @@ import androidx.room.*
 
 
 @Dao
-interface DaoMarker{
+interface DaoMarker {
     @Query("SELECT * FROM Marker")
-    fun getAllMarkers(): LiveData<List<Marker>>
-
+    fun getAllMarkers(): LiveData<List<MarkerWithType>>
     @Insert
     suspend fun insertMarker(marker: Marker)
 
     @Delete
     suspend fun deleteMarker(marker: Marker)
-
 }
 @Dao
 interface MarkerTypeDao {
