@@ -12,4 +12,6 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
     private val markerDao = AppDatabase.getDatabase(application).markerDao()
     private val markerTypeDao = AppDatabase.getDatabase(application).markerTypeDao()
 
+    val allMarkers: LiveData<List<Marker>> = markerDao.getAllMarkers()
+
 }
