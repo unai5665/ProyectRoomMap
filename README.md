@@ -40,4 +40,4 @@ implementation "com.google.android.gms:play-services-maps:18.0.2"
 ![Mapa con marcadores](https://github.com/unai5665/ProyectRoomMap/blob/master/Interfaz.PNG)
 
 ## Créditos
-Proyecto desarrollado por [Unai Perez Toscano].
+Proyecto desarrollado por Unai Perez Toscano.
