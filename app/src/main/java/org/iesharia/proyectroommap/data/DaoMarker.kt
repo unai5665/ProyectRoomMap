@@ -20,6 +20,7 @@ interface MarkerTypeDao {
     @Query("SELECT * FROM MarkerType")
     fun getAllMarkerTypes(): LiveData<List<MarkerType>>
 
-
+    @Insert(onConflict = OnConflictStrategy.IGNORE)  // Insertará solo si no existe ya un tipo igual
+    suspend fun insertMarkerType(markerType: MarkerType)
 
 }
