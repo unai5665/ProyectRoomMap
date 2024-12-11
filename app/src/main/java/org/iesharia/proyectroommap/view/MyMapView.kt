@@ -69,6 +69,35 @@ fun MyMapView(modifier: Modifier = Modifier, viewModel: MarkerViewModel) {
             .copy(zoomButtonVisibility = ZoomButtonVisibility.NEVER)
     }
 
+    // Crear el mapa con las propiedades configuradas
+    OpenStreetMap(
+        modifier = modifier.fillMaxSize(),
+        cameraState = cameraState,
+        properties = mapProperties
+    ) {
+        // Dibujar los marcadores en el mapa
+        marcadoresWithTipo.forEach { marcadorWithTipo ->
+            val marcador = marcadorWithTipo.marker
+            val tipo = marcadorWithTipo.markerType?.name ?: "Sin tipo"  // Asegúrate de acceder correctamente al nombre del tipo
+
+            val markerState = rememberMarkerState(
+                geoPoint = GeoPoint(marcador.latitude, marcador.longitude)
+            )
+
+            // Obtener el recurso del icono desde el tipo de marcador
+            val iconResource = marcadorWithTipo.markerType?.iconResource
+                ?: R.drawable.burger_king  // Reemplaza con tu icono por defecto
+
+            // Redimensionar el icono y obtener un Drawable
+            val resizedIconDrawable = resizeDrawable(iconResource, 50.dp) // Ajusta el tamaño aquí (50.dp es solo un ejemplo)
+
+            // Crear el marcador y asignar el icono redimensionado
+            Marker(
+                state = markerState,
+                title = marcador.title,
+                snippet = tipo,
+                icon = resizedIconDrawable
+            ) {
 
             }
         }
