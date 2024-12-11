@@ -98,7 +98,18 @@ fun MyMapView(modifier: Modifier = Modifier, viewModel: MarkerViewModel) {
                 snippet = tipo,
                 icon = resizedIconDrawable
             ) {
-
+                // Crear la ventana de información del marcador
+                Column(
+                    modifier = Modifier
+                        .size(150.dp)
+                        .background(color = Color.White, shape = RoundedCornerShape(7.dp))
+                        .padding(10.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = it.title, fontWeight = FontWeight.Bold) // Título del marcador
+                    Text(text = it.snippet, fontSize = 12.sp) // Tipo del marcador
+                }
             }
         }
     }
