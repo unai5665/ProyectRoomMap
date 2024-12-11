@@ -37,7 +37,7 @@ implementation "com.google.android.gms:play-services-maps:18.0.2"
 ## Capturas de Pantalla
 
 ### Mapa con Marcadores
-![Mapa con marcadores](assets/map_screenshot.png)
+![Mapa con marcadores](https://github.com/unai5665/ProyectRoomMap/blob/master/Interfaz.PNG)
 
 ## Créditos
 Proyecto desarrollado por [Unai Perez Toscano].
