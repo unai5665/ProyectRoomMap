@@ -52,8 +52,12 @@ fun MyMapView(modifier: Modifier = Modifier, viewModel: MarkerViewModel) {
     // Cargar los marcadores desde el ViewModel
     val marcadoresWithTipo by viewModel.markersWithTypes.observeAsState(emptyList())
 
+    // Configuración de la cámara inicial
+    val cameraState = rememberCameraState {
+        geoPoint = GeoPoint(40.758867364684974, -73.97862526286872) // Coordenadas iniciales
+        zoom = 14.0 // Nivel de zoom inicial
+    }
 
-                }
             }
         }
     }
