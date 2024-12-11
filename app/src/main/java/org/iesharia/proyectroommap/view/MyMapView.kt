@@ -54,8 +54,8 @@ fun MyMapView(modifier: Modifier = Modifier, viewModel: MarkerViewModel) {
 
     // Configuración de la cámara inicial
     val cameraState = rememberCameraState {
-        geoPoint = GeoPoint(40.758867364684974, -73.97862526286872) // Coordenadas iniciales
-        zoom = 14.0 // Nivel de zoom inicial
+        geoPoint = GeoPoint(40.758867364684974, -73.97862526286872)
+        zoom = 14.0
     }
 
     // Propiedades del mapa con valores predeterminados
@@ -114,4 +114,17 @@ fun MyMapView(modifier: Modifier = Modifier, viewModel: MarkerViewModel) {
         }
     }
 }
+@Composable
+fun resizeDrawable(iconResource: Int, size: Dp): Drawable? {
+    val context = LocalContext.current
+    val drawable = ContextCompat.getDrawable(context, iconResource) ?: ContextCompat.getDrawable(context, R.drawable.mapas_y_banderas)
+    val density = LocalDensity.current.density
+    val sizePx = (size.value * density).toInt()
+
+    return (drawable as? BitmapDrawable)?.let {
+        val scaledBitmap = Bitmap.createScaledBitmap(it.bitmap, sizePx, sizePx, false)
+        BitmapDrawable(context.resources, scaledBitmap)
+    } ?: drawable
+}
+
 
