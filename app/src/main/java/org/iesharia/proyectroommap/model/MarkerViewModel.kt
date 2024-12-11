@@ -18,22 +18,28 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
 
     val markersWithTypes: LiveData<List<MarkerWithType>> = markerDao.getAllMarkers()
 
-
     // Nueva función para inicializar datos
     fun initializeData() = viewModelScope.launch(Dispatchers.IO) {
-        // Verificar si ya existen datos antes de insertarlos
-        if (markerTypeDao.getAllMarkerTypes().value.isNullOrEmpty()) {
-            val defaultMarkers = listOf(
-                // Tipos de marcadores
+        // Verificar si ya existen tipos de marcadores en la base de datos
+        val existingMarkerTypes = markerTypeDao.getAllMarkerTypesSync() // Método síncrono
+
+        // Si no existen los tipos de marcadores, los insertamos
+        if (existingMarkerTypes.isEmpty()) {
+            val defaultMarkerTypes = listOf(
                 MarkerType(name = "BurgerKing's", iconResource = R.drawable.burger_king),
                 MarkerType(name = "Café", iconResource = R.drawable.cafeteria),
                 MarkerType(name = "Parque", iconResource = R.drawable.parque_natural),
                 MarkerType(name = "Museo", iconResource = R.drawable.museo_britanico)
             )
-            defaultMarkers.forEach { markerTypeDao.insertMarkerType(it) }
+            defaultMarkerTypes.forEach { markerTypeDao.insertMarkerType(it) }
+        }
 
-            // Marcadores
-            val defaultLocations = listOf(
+        // Verificar si ya existen los marcadores en la base de datos
+        val existingMarkers = markerDao.getAllMarkersSync() // Método síncrono
+
+        if (existingMarkers.isEmpty()) {
+            // Marcadores predeterminados
+            val defaultMarkers = listOf(
                 Marker(title = "Burger King", latitude = 40.70974178447033, longitude = -74.01187432862362, typeId = 1),
                 Marker(title = "Burger King", latitude = 40.75076083238586, longitude = -73.98823646870025, typeId = 1),
                 Marker(title = "Burger King", latitude = 40.66425998295402, longitude = -73.95697833985417, typeId = 1),
@@ -54,7 +60,7 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
                 Marker(title = "Madame Tussauds New York", latitude = 40.757003103857066, longitude = -73.98891734730861, typeId = 4),
                 Marker(title = "SPYSCAPE", latitude = 40.76559718382199, longitude = -73.98386440453723, typeId = 4)
             )
-            defaultLocations.forEach { markerDao.insertMarker(it) }
+            defaultMarkers.forEach { markerDao.insertMarker(it) }
         }
     }
 }
