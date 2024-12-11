@@ -4,10 +4,10 @@ import androidx.room.*
 
 @Entity
 data class MarkerType(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0, // No es necesario pasar 'id' al crear
     val name: String,
     val iconResource: Int
-    )
+)
 
 @Entity(
     foreignKeys = [ForeignKey(
@@ -18,7 +18,7 @@ data class MarkerType(
     )]
 )
 data class Marker(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true)
     val title: String,
     val latitude: Double,
     val longitude: Double,
