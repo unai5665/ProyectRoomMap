@@ -18,7 +18,7 @@ data class MarkerType(
     )]
 )
 data class Marker(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true) val id: Int = 0, // No es necesario pasar 'id' al crear
     val title: String,
     val latitude: Double,
     val longitude: Double,
