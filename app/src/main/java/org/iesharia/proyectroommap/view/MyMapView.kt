@@ -58,6 +58,18 @@ fun MyMapView(modifier: Modifier = Modifier, viewModel: MarkerViewModel) {
         zoom = 14.0 // Nivel de zoom inicial
     }
 
+    // Propiedades del mapa con valores predeterminados
+    var mapProperties by remember { mutableStateOf(DefaultMapProperties) }
+
+    // Configurar propiedades del mapa en un SideEffect
+    SideEffect {
+        mapProperties = mapProperties
+            .copy(tileSources = GoogleSat)
+            .copy(isEnableRotationGesture = true)
+            .copy(zoomButtonVisibility = ZoomButtonVisibility.NEVER)
+    }
+
+
             }
         }
     }
