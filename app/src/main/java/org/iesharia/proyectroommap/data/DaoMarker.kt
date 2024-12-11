@@ -9,7 +9,8 @@ interface DaoMarker {
     fun getAllMarkers(): LiveData<List<MarkerWithType>>  // Devuelve la relación entre Marker y MarkerType
 
 
-
+    @Insert(onConflict = OnConflictStrategy.IGNORE)  // Insertará solo si no existe un marcador con esas coordenadas
+    suspend fun insertMarker(marker: Marker)
 
 }
 
