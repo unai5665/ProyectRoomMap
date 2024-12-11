@@ -47,3 +47,15 @@ val GoogleSat: OnlineTileSourceBase = object : XYTileSource(
     }
 }
 
+@Composable
+fun MyMapView(modifier: Modifier = Modifier, viewModel: MarkerViewModel) {
+    // Cargar los marcadores desde el ViewModel
+    val marcadoresWithTipo by viewModel.markersWithTypes.observeAsState(emptyList())
+
+
+                }
+            }
+        }
+    }
+}
+
