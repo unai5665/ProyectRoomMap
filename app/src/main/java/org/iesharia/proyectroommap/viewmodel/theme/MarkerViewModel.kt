@@ -1,4 +1,4 @@
-package org.iesharia.proyectroommap.model
+package org.iesharia.proyectroommap.viewmodel.theme
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,10 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.viewmodelrm.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.iesharia.proyectroommap.data.AppDatabase
-import org.iesharia.proyectroommap.data.Marker
-import org.iesharia.proyectroommap.data.MarkerType
-import org.iesharia.proyectroommap.data.MarkerWithType
+import org.iesharia.proyectroommap.model.AppDatabase
+import org.iesharia.proyectroommap.model.Marker
+import org.iesharia.proyectroommap.model.MarkerType
+import org.iesharia.proyectroommap.model.MarkerWithType
 
 class MarkerViewModel(application: Application) : AndroidViewModel(application) {
     private val markerDao = AppDatabase.getDatabase(application).markerDao()

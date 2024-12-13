@@ -1,4 +1,4 @@
-package org.iesharia.proyectroommap.ui.theme
+package org.iesharia.proyectroommap.viewmodel.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

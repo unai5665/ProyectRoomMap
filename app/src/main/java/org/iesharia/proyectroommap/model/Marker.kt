@@ -1,4 +1,4 @@
-package org.iesharia.proyectroommap.data
+package org.iesharia.proyectroommap.model
 
 import androidx.room.*
 

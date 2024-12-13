@@ -1,4 +1,4 @@
-package org.iesharia.proyectroommap.ui.theme
+package org.iesharia.proyectroommap.viewmodel.theme
 
 import androidx.compose.ui.graphics.Color
 

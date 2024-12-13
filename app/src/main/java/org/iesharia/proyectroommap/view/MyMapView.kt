@@ -3,6 +3,7 @@ package org.iesharia.proyectroommap.view
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,7 +27,7 @@ import com.utsman.osmandcompose.OpenStreetMap
 import com.utsman.osmandcompose.ZoomButtonVisibility
 import com.utsman.osmandcompose.rememberCameraState
 import com.utsman.osmandcompose.rememberMarkerState
-import org.iesharia.proyectroommap.model.MarkerViewModel
+import org.iesharia.proyectroommap.viewmodel.theme.MarkerViewModel
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase
 import org.osmdroid.tileprovider.tilesource.XYTileSource
 import org.osmdroid.util.GeoPoint
@@ -42,8 +43,7 @@ val GoogleSat: OnlineTileSourceBase = object : XYTileSource(
     )
 ) {
     override fun getTileURLString(aTile: Long): String {
-        return baseUrl + "/vt/lyrs=s&x=" + MapTileIndex.getX(aTile) + "&y=" + MapTileIndex.getY(
-            aTile) + "&z=" + MapTileIndex.getZoom(aTile)
+        return baseUrl + "/vt/lyrs=s&x=" + MapTileIndex.getX(aTile) + "&y=" + MapTileIndex.getY(aTile) + "&z=" + MapTileIndex.getZoom(aTile)
     }
 }
 
@@ -89,35 +89,48 @@ fun MyMapView(modifier: Modifier = Modifier, viewModel: MarkerViewModel) {
                 ?: R.drawable.burger_king  // Reemplaza con tu icono por defecto
 
             // Redimensionar el icono y obtener un Drawable
-            val resizedIconDrawable = resizeDrawable(iconResource, 50.dp) // Ajusta el tamaño aquí (50.dp es solo un ejemplo)
+            val resizedIconDrawable = resizeDrawable(iconResource, 50.dp) // Ajusta el tamaño aquí
 
-            // Crear el marcador y asignar el icono redimensionado
-            Marker(
-                state = markerState,
-                title = marcador.title,
-                snippet = tipo,
-                icon = resizedIconDrawable
-            ) {
-                // Crear la ventana de información del marcador
-                Column(
-                    modifier = Modifier
-                        .size(150.dp)
-                        .background(color = Color.White, shape = RoundedCornerShape(7.dp))
-                        .padding(10.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+            // Verifica que el Drawable no sea nulo antes de crear el marcador
+            if (resizedIconDrawable != null) {
+                // Crear el marcador y asignar el icono redimensionado
+                Marker(
+                    state = markerState,
+                    title = marcador.title,
+                    snippet = tipo,
+                    icon = resizedIconDrawable
                 ) {
-                    Text(text = it.title, fontWeight = FontWeight.Bold) // Título del marcador
-                    Text(text = it.snippet, fontSize = 12.sp) // Tipo del marcador
+                    // Crear la ventana de información del marcador
+                    Column(
+                        modifier = Modifier
+                            .size(150.dp)
+                            .background(color = Color.White, shape = RoundedCornerShape(7.dp))
+                            .padding(10.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(text = it.title, fontWeight = FontWeight.Bold) // Título del marcador
+                        Text(text = it.snippet, fontSize = 12.sp) // Tipo del marcador
+                    }
                 }
+            } else {
+                Log.e("MyMapView", "El icono redimensionado es nulo para el marcador: ${marcador.title}")
             }
         }
     }
 }
+
 @Composable
 fun resizeDrawable(iconResource: Int, size: Dp): Drawable? {
     val context = LocalContext.current
-    val drawable = ContextCompat.getDrawable(context, iconResource) ?: ContextCompat.getDrawable(context, R.drawable.mapas_y_banderas)
+    val drawable = ContextCompat.getDrawable(context, iconResource)
+
+    if (drawable == null) {
+        // Agregar log si el icono no se encuentra
+        Log.e("MyMapView", "No se encontró el recurso de imagen para el icono con el ID: $iconResource")
+        return ContextCompat.getDrawable(context, R.drawable.mapas_y_banderas) // Usar imagen por defecto si hay un error
+    }
+
     val density = LocalDensity.current.density
     val sizePx = (size.value * density).toInt()
 
@@ -126,5 +139,3 @@ fun resizeDrawable(iconResource: Int, size: Dp): Drawable? {
         BitmapDrawable(context.resources, scaledBitmap)
     } ?: drawable
 }
-
-
